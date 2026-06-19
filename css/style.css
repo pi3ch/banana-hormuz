@@ -182,3 +182,58 @@ html, body {
 .help-text { max-width: min(620px, 92%); text-align: left; display: flex; flex-direction: column; gap: 0.7rem; color: var(--ink); font-size: clamp(0.78rem, 1.9vw, 1rem); line-height: 1.5; }
 .help-text b { color: var(--accent); }
 .help-text .keys { color: var(--ink-dim); font-size: 0.85em; border-top: 1px solid var(--panel-edge); padding-top: 0.6rem; }
+
+/* =====================================================================
+   Responsive — PORTRAIT / MOBILE
+   Stop letterboxing the 8:5 stage into a short strip. Instead fill the
+   screen: canvas at top (full width, keeps ratio), HUD flows BELOW it
+   (no longer overlapping the playfield), and menus get the full height
+   so the footer can't sit behind the buttons.
+   ===================================================================== */
+@media (orientation: portrait) {
+  #stage {
+    position: relative;
+    inset: auto;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #game {
+    width: 100vw;
+    height: calc(100vw / 1.6);   /* keep the 8:5 ratio, full width */
+    flex: 0 0 auto;
+  }
+  /* HUD sits below the canvas and sizes to its content */
+  .hud {
+    position: static;
+    flex: 0 0 auto;
+    gap: 0.6rem;
+    padding-bottom: max(0.55rem, env(safe-area-inset-bottom));
+  }
+  .hud-controls { gap: 0.7rem; }
+  .btn.fire { width: 100%; }                 /* big, easy-to-tap fire button */
+  .ctrl input[type=range] { height: 1.8rem; } /* larger touch target */
+  .ctrl { flex: 1 1 45%; }
+}
+
+/* =====================================================================
+   Responsive — SHORT VIEWPORTS (landscape phones)
+   Keep the centered layout, but compact the menu + HUD so the footer
+   credit never collides with the buttons and the HUD stays slim.
+   ===================================================================== */
+@media (max-height: 520px) {
+  .overlay { gap: 0.5rem; padding: 2% 4%; }
+  .title { font-size: clamp(1.4rem, 6vh, 2.6rem); }
+  .btn-col { gap: 0.45rem; }
+  .btn { padding: 0.45em 1em; }
+  .btn.back { margin-top: 0.2rem; }
+  .credit { font-size: 0.68rem; bottom: 1.5%; }
+  .hud { padding: 0.35rem 0.7rem; gap: 0.3rem; }
+  .hud-info { font-size: 0.72rem; }
+}
