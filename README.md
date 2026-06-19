@@ -1,4 +1,6 @@
-# 🍌 Banana Hormuz
+# Banana Hormuz
+
+![Banana Hormuz game poster](img/banana-hormuz-game-poster.png)
 
 A pixel-bit artillery game set on the cliffs across
 the **Strait of Hormuz**. Take turns lobbing your signature projectile at your opponent,
